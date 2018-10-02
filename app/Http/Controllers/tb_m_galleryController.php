@@ -79,6 +79,8 @@ class tb_m_galleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tb_m_gallery = tb_m_gallery::findOrFail($id);
+        $tb_m_gallery->delete();
+        return redirect()->route('artikel.index')->with('success','Pengajar Deleted');
     }
 }

@@ -301,16 +301,12 @@
                                 <h2 class="widget-title">Recent Post</h2>
                                 <div class="widget-content">
                                     <!-- Recent Post -->
+                                   @foreach($tb_m_artikel as $data)
                                     <article class="post">
-                                        <span class="date">31 May</span>
-                                        <h4><a href="blog-single-2.html">Play is Our Brain’s Favorite Way of Learning</a></h4>
+                                        <span class="date">{{Date::parse($data->create_at)->format('d M')}}</span>
+                                        <h4><a href="blog-single-2.html">{{ $data->judul }}</a></h4>
                                     </article>
-
-                                    <!-- Recent Post -->
-                                    <article class="post">
-                                        <span class="date">01 June</span>
-                                        <h4><a href="blog-single-2.html">Where Well Rounded Starts with Well Educated</a></h4>
-                                    </article>
+                                    @endforeach
                                 </div>
                             </div>  
                         </div>         

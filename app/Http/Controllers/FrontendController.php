@@ -7,7 +7,8 @@ use App\tb_s_sekolah;
 use App\tb_m_siswa;
 use App\tb_m_pengajar;
 use App\tb_m_mata_pelajaran;
-
+use App\tb_m_artikel;
+use App\tb_m_event;
 class FrontendController extends Controller
 {
     /**
@@ -22,8 +23,10 @@ class FrontendController extends Controller
         $tb_s_sekolah=tb_s_sekolah::all();
         $tb_m_pengajar=tb_m_pengajar::all();
         $jumlahguru= tb_m_pengajar::all();
-        
-        return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru'));
+        $tb_m_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(6);
+         $tb_m_event =tb_m_event::orderBy('waktu','desc')->get();
+       
+        return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event'));
     }
 
     public function contact()
@@ -33,8 +36,9 @@ class FrontendController extends Controller
         $tb_s_sekolah=tb_s_sekolah::all();
         $tb_m_pengajar=tb_m_pengajar::all();
         $jumlahguru= tb_m_pengajar::all();
+        $tb_m_event =tb_m_event::all();
         
-        return view('frontend.contact' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru'));
+        return view('frontend.contact' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_event'));
     }
 
     /**

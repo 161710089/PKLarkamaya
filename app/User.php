@@ -35,10 +35,6 @@ class User extends Authenticatable
   return $this->hasMany('App\tb_m_artikel','id_user');
 }
 
-  public function tb_m_event()
-{
-  // Setiap user akan memiliki banyak tb_m_event
-  return $this->hasMany('App\tb_m_event','id_user');
-}
+  
 
 }

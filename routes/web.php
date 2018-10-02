@@ -41,6 +41,8 @@ Route::post('settings/profile', 'SettingsController@updateProfile');
 Route::get('settings/password', 'SettingsController@editPassword');
 Route::post('settings/password', 'SettingsController@updatePassword');
 Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
+Route::get('/delete-artikel/{id}', 'tb_m_artikelController@deleteArtikelRecord');
+Route::get('/delete-event/{id}', 'tb_m_eventController@deleteEventRecord');
 Route::get('/delete-mapel/{id}', 'tb_m_mata_pelajaranController@deleteMapelRecord');
 Route::get('/delete-pengajar/{id}', 'tb_m_pengajarController@deletePengajarRecord');
 Route::get('/delete-siswa/{id}', 'tb_m_siswaController@deleteSiswaRecord');
@@ -73,13 +75,18 @@ Route::get('/search', [
 
 
 Route::resource('absensi','tb_m_absensiController');
+Route::resource('event','tb_m_eventController');
+
 // Route::get('search','searchController@index');
+Route::resource('Eventpengajar','tb_mix_EventpengajarController');
 Route::resource('sekolah','tb_s_sekolahController');
 Route::resource('pembayaran','tb_m_pembayaranController');
 Route::get('/siswa/show/pembayaran',['as'=>'getPayment','uses'=>'tb_m_pembayaranController@index']);
 Route::post('/siswa/pembayaran',['as'=>'lihatPembayaranSiswa','uses'=>'tb_m_pembayaranController@lihatPembayaranSiswa']);
 
 Route::resource('siswa','tb_m_siswaController');
+Route::resource('artikel','tb_m_artikelController');
+
 Route::get('tanggal_lahir','searchController@ttl')->name('tanggal_lahir');
 Route::get('nama_panggilan','searchController@nama_panggilan')->name('nama_panggilan');
 Route::get('alamat','searchController@alamat')->name('alamat');

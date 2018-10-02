@@ -16,6 +16,10 @@ public function tb_m_mata_pelajaran() {
 public function tb_m_absensi() {
         return $this->hasMany('App\tb_m_absensi', 'id_absensi');
     }
-
+public function tb_m_event()
+{
+  // Setiap user akan memiliki banyak tb_m_event
+  return $this->hasMany('App\tb_m_event','id_pengajar');
+}
 
 }

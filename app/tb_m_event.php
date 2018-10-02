@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class tb_m_event extends Model
 {
-protected $table = 'tb_m_event';
-protected $fillable = array('judul','waktu','gambar','id_user');
+protected $table = 'tb_m_events';
+protected $fillable = array('judul','waktu','gambar','id_pengajar');
 public $timestamp = true;
 
-public function User() {
-	return $this->belongsTo('App\User', 'id_user');
+public function tb_m_pengajar() {
+	return $this->belongsTo('App\tb_m_pengajar', 'id_pengajar');
 	}
 }

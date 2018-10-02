@@ -331,6 +331,11 @@
         </div>
     </section>
     <!-- End Subscribe Section -->
+@php
+use Jenssegers\Date\Date;
+
+Date::setLocale('id');
+@endphp
 
     <!-- Event Section -->
     <section class="event-section" style="background-image: url(/frontend/images/background/pattern-1.png);">
@@ -342,23 +347,25 @@
             <div class="event-table">
                 <div class="title-box"><span class="icon fa fa-calendar"></span> Event</div>
                 <!-- Event Block -->
+                        @foreach($tb_m_event as $data)
                 <div class="event-block wow fadeInUp">
                     <div class="inner-box clearfix">
-                        
                         <div class="image-column">
-                            <div class="image"><a href="event-single.html"><img src="/frontend/images/resource/event-1.jpg" alt=""></a></div>
+                            <div class="image"><a href="event-single.html"><img src="{{ asset('img/Fotoevent/'.$data->foto) }}" style="max-height:200px; max-width: 500px;" alt=""></a></div>
                         </div>
 
                         <div class="day-column">
-                            <h3>DAY 1</h3>
-                            <span>31 May, 2018</span>
+                            <h3>{{Date::parse($data->waktu)->format('D')}}</h3>
+                            <span>{{Date::parse($data->waktu)->format('d M, Y')}}</span>
                         </div>
 
                         <div class="info-column">
-                            <h4><a href="event-single.html">World Drawing Day</a></h4>
+                            <h4><a href="event-single.html">{{ $data->judul }}</a></h4>
                             <ul class="info">
-                                <li><a href="event-single.html"><i class="fa fa-clock-o"></i> 09:00 AM</a></li>
-                                <li><a href="event-single.html"><i class="fa fa-user"></i> Henry Keen St School</a></li>
+                                <li><a href="event-single.html"><i class="fa fa-clock-o"></i>
+                                  {{Date::parse($data->waktu)->format('H:i')}}</a></li>
+                                <li><a href="event-single.html"><i class="fa fa-user"></i>
+                                  {{ $data->tb_m_pengajar->nama }}</a></li>
                             </ul>
                         </div>
 
@@ -371,9 +378,9 @@
                         </div>
                     </div>
                 </div>
+                        @endforeach
 
-                <!-- Event Block -->
-                <div class="event-block wow fadeInUp">
+                {{-- <div class="event-block wow fadeInUp">
                     <div class="inner-box clearfix">
                         
                         <div class="image-column">
@@ -403,7 +410,6 @@
                     </div>
                 </div>
 
-                <!-- Event Block -->
                 <div class="event-block wow fadeInUp">
                     <div class="inner-box clearfix">
                         
@@ -432,7 +438,7 @@
                             <a href="event-single.html" class="theme-btn">Register</a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="link-box text-center">
@@ -462,7 +468,7 @@
                         {{-- Waktu --}}
                         <div class="timer">
                           @foreach($tb_s_sekolah as $data)
-                            <div class="cs-countdown" data-countdown="{{ $data->next }}"></div>            
+                            <div class="cs-countdown" data-countdown="10/30/2018 17:06:59"></div>            
                           @endforeach
                         </div>
                         {{-- End Waktu --}}
@@ -505,28 +511,33 @@
             </div>
             <div class="row clearfix">
                 <!-- News Block -->
+
+                @foreach($tb_m_artikel as $data)
                 <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
                         <div class="image-box">
                             <span class="tag">News</span>
-                            <div class="image"><a href="blog-single-1.html"><img src="/frontend/images/resource/news-1.jpg" alt=""></a></div>
+                            <div class="image"><a href="blog-single-1.html"><img src="{{ asset('img/Fotoartikel/'.$data->foto) }} " style="max-height:200px; min-height:200px; min-width:500px;  max-width: 500px; margin-top:7px;" alt=""></a></div>
                         </div>
                         <div class="lower-content">
                             <div class="title">
-                                <div class="date">31 <span>May</span></div>
+
+                                <div class="date">{{Date::parse($data->create_at)->format('d')}} 
+                                            <span>{{Date::parse($data->create_at)->format('M')}}</span></div>
                                 <ul class="info">
-                                     <li>By Admin</li>
+                                     <li>By {{ $data->user->name }}</li>
                                      <li>01 comment</li>
                                 </ul>
-                                <h3><a href="blog-single-1.html">Play Is Our Brain's Favorite Way Of Learning</a></h3>
+                                <h3><a href="blog-single-1.html">{{ $data->judul }}</a></h3>
                             </div>
-                            <div class="text">Timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar lutions without functional solutions.</div>
+                            <div class="text">{!! $data->deskripsi !!}.</div>
                          </div>
                     </div>
                 </div>
+                @endforeach
 
                 <!-- News Block -->
-                <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
+               {{--  <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
                     <div class="inner-box">
                         <div class="image-box">
                             <span class="tag">News</span>
@@ -545,9 +556,9 @@
                          </div>
                     </div>
                 </div>
-
+ --}}
                 <!-- News Block -->
-                <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="1200ms">
+                {{-- <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="1200ms">
                     <div class="inner-box">
                         <div class="image-box">
                             <span class="tag">News</span>
@@ -565,7 +576,7 @@
                             <div class="text">Timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar lutions without functional solutions.</div>
                          </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

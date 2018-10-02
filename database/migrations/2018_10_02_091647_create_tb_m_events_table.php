@@ -17,9 +17,9 @@ class CreateTbMEventsTable extends Migration
             $table->increments('id');
             $table->string('judul');
             $table->datetime('waktu');
-            $table->string('gambar');
-            $table->unsignedInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('CASCADE');
+            $table->string('foto');
+            $table->unsignedInteger('id_pengajar');
+            $table->foreign('id_pengajar')->references('id')->on('tb_m_pengajars')->onDelete('CASCADE');
          
             $table->timestamps();
         });
